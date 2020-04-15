@@ -1,0 +1,47 @@
+﻿<script src="http://connect.facebook.net/en_US/all.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#divInviteFriends").show("fast");
+    })
+
+    
+
+FB.init({
+appId: '917438411698499',
+cookie:true,
+status:true,
+xfbml:true
+});
+
+function FacebookInviteFriends()
+{
+FB.ui({
+method: 'apprequests',
+message: 'Invite your facebook friends'
+});
+}
+</script>
+
+<div id="divInviteFriends" style="background-color:white;width:100%;min-height:490px;margin:20px 20px 0 20px;padding:10px 10px 0 0;display:none;">
+    <span style="width:100%;height:30px;display:block;text-align:center;background-color:brown;color:white;padding-top:5px">Invite Your Friends</span>
+    <div>
+        <div style="float:left" id="fb-root"></div>
+        <input type="button" style="background-color:#3b579d;color:white;width:300px;height:60px;display:block;text-align:center;float:left;margin:20px" value="Invite friends from Facebook" href='#' onclick="FacebookInviteFriends();" />
+
+        <div>
+            <input type="button" style="background-color:#d95232;color:white;width:300px;height:60px;display:block;text-align:center;margin:20px" value="Invite contacts from Google+" href='#' />
+
+        </div>
+
+        <div>
+            <input type="button" style="background-color:##4cb9da;color:white;width:300px;height:60px;display:block;text-align:center;margin:20px" value="Invite contacts from Email" href='#' />
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

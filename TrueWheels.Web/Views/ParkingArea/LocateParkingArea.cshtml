@@ -1,0 +1,322 @@
+﻿@model IEnumerable<TrueWheels.Web.Models.LocateParkingViewModel>
+
+@{
+    ViewBag.Title = "LocateParkingArea";
+    <style>
+        html,
+        body,
+        #map_canvas {
+            height: 300px;
+            width: 100%;
+            margin: 5px;
+            padding: 0px;
+            
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk&libraries=places"></script>
+  
+    <script type="text/javascript">
+
+        var map;
+        var servicec;
+
+        function GetParameterValues(param) {
+            var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < url.length; i++) {
+                var urlparam = url[i].split('=');
+                if (urlparam[0] == param) {
+                    return urlparam[1].replace(/\%20/g, ' ');
+                }
+            }
+        }
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+        function initMap(crd) {
+            //alert("hi");
+            //alert(crd.latitude);
+            var currentLatt;
+            var currentLong;
+            var latt = getParameterByName('lat') * 1.0;
+            var long = getParameterByName('long') * 1.0;
+            //alert(currentLatt);
+            //alert(Number(currentLatt);
+           
+            var source = new google.maps.LatLng(crd.latitude, crd.longitude);
+            var destination = new google.maps.LatLng(latt, long);
+
+            var parkingName = GetParameterValues('address');
+
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1].replace(/\%20/g, ' ');
+                    }
+                }
+            }
+            
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
+                center: source,
+                scrollwheel: true,
+                zoom: 7
+            });
+
+
+            var directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            });
+
+            // Set destination, origin and travel mode.
+            var request = {
+                destination: destination,
+                origin: source,
+                travelMode: google.maps.TravelMode.DRIVING//
+            };
+
+            // Pass the directions request to the directions service.
+            var directionsService = new google.maps.DirectionsService();
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    // Display the route on the map.
+                    directionsDisplay.setDirections(response);
+                }
+            });
+           
+            //var request = {
+            //    location: destination,
+            //    radius: '500',
+            //    query: 'restaurant'
+            //};
+
+            //service = new google.maps.places.PlacesService(map);
+            //service.textSearch(request, callback);
+            service = new google.maps.places.PlacesService(map);
+
+            // The idle event is a debounced event, so we can query & listen without
+            // throwing too many requests at the server.
+            map.addListener('idle', performSearch);
+
+            $('div#ParkingName').html(parkingName);
+
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('right-panel'));
+
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                var start = source;
+                var end = destination;
+                directionsService.route({
+                    origin: start,
+                    destination: end,
+                    travelMode: 'DRIVING'
+                }, function (response, status) {
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+
+
+            }
+            function performSearch() {
+                service = new google.maps.places.PlacesService(map);
+                var request = {
+                    bounds: map.getBounds(),
+                    types: ['shopping_mall', 'restaurents'],
+                    //keyword:'famous',
+                    radius: 100,
+                    openNow: true,
+
+                };
+                service.nearbySearch(request, callback);
+            }
+
+            function callback(results, status) {
+                if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                    console.error(status);
+                    return;
+                }
+                var mydiv = document.getElementById("markers_info");
+                for (var i = 0, result; result = results[i]; i++) {
+                    //addMarker(result);
+                    var place = result;
+                    service.getDetails(place, function (result1, status) {
+                        if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                            console.error(status);
+                            alert(status);
+                            return;
+                        }
+                        //infoWindow.setContent(result.name);
+                        //alert(result1.name);
+
+                        var aTag = document.createElement('a');
+                        aTag.setAttribute('href', "#");
+                        aTag.setAttribute('class', "list-group-item marker");
+                        aTag.innerHTML = result1.name;
+                        mydiv.appendChild(aTag);
+                    });
+                }
+            }
+        }
+        
+        $(document).ready(function () {
+            var parkingName = GetParameterValues('parkId');
+
+            $.ajax({
+                url: '@Url.Action("GetParkingdetail", "ParkingArea")',
+                data: { park_Id: parkingName },
+                cache: false,
+                type: "Get",
+                dataType: "JSON",
+                success: function (data) {
+                    $('#idDescription').html(data.Description);
+                    //$('#ReviewComments').html(data.Description);
+                },
+                //error: function (xhr) {
+                //    debugger
+                //    alert(xhr.statusText);
+                //}
+            });
+        });
+    </script>
+
+}
+<div id="ParkingName"><h4></h4>
+</div>
+@*@{
+<h4>@Html.DisplayNameFor(model => model.AddressName)</h4>
+}*@
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartLat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartLong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndLat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndtLat)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartLat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartLong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndLat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndtLat)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+    <div class="col-lg-8">
+        <div class="row">
+            <div id="map_canvas" style="width: 100%; height: 500px"></div>
+        </div>
+        <div class="col-lg-12">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Description</h3>
+                </div>
+                <div id="idDescription" class="panel-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Review & Comments</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                    <p>...</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Facilities</h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                    <p>...</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-4">
+        
+            @*<div class="form-group">
+                    <form>
+                        <input type="text" class="form-control" placeholder="From" />
+                        <input type="text" class="form-control" placeholder="To" />
+                    </form>
+                </div>*@
+                <div id="right-panel" style="height:200px;overflow-x:hidden;overflow-y:scroll"></div>
+           
+        
+                <h4>Near by parking area</h4>
+                <hr />
+                <div class="list-group" id="markers_info" style="height:200px;overflow-x:hidden;overflow-y:scroll">
+
+                </div>
+            
+    </div>
+
+<script type="text/javascript">
+
+    var options = {
+        enableHighAccuracy: true,
+        timeout: 7000,
+        maximumAge: 0
+    };
+    var crd;
+    function success(pos) {
+        crd = pos.coords;
+        console.log('Your current position is:');
+        console.log('Latitude : ' + crd.latitude);
+        console.log('Longitude: ' + crd.longitude);
+        console.log('More or less ' + crd.accuracy + ' meters.');
+        initMap(crd);
+    };
+
+    function error(err) {
+        console.warn('ERROR(' + err.code + '): ' + err.message);
+    };
+    navigator.geolocation.getCurrentPosition(success, error, options);
+</script>

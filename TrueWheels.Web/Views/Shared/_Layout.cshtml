@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <link href="~/Content/css/footer-distributed-with-address-and-phones.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content")
+    @Scripts.Render("~/Content/js")
+
+
+</head>
+
+<body>
+
+    <div class="header-connect">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-8 col-xs-8">
+                    @*<div class="header-half header-call">
+                            <p>
+                                @if (Session["userDetail"] != null)
+                                {
+                                    if (((TrueWheels.Web.Models.UserLoginDetailsViewModel)(Session["userDetail"])).User_ID == "0")
+                                    {
+                                        <span><i class="icon-cloud"></i>Mobile_number</span>
+                                        <span><i class="icon-mail"></i>EmailId</span>
+                                    }
+                                    else
+                                    {
+                                        <span><i class="icon-cloud"></i>@(((TrueWheels.Web.Models.UserLoginDetailsViewModel)(Session["userDetail"])).Phone_No1)</span>
+                                        <span><i class="icon-mail"></i>@(((TrueWheels.Web.Models.UserLoginDetailsViewModel)(Session["userDetail"])).Email_Id)</span>
+                                    }
+                                }
+                                else
+                                {
+                                    <span><i class="icon-cloud"></i>Mobile_number</span>
+                                    <span><i class="icon-mail"></i>EmailId</span>
+                                }
+                            </p>
+                        </div>*@
+                </div>
+                <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-3  col-xs-offset-1">
+                    @*<div class="header-half header-social">
+                            <ul class="list-inline">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-vine"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default" style="border:0px">
+        <div class="container btn-info" style="border:0px; border-bottom-left-radius:10px;border-bottom-right-radius:10px">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="row">
+                <div class="col-md-3">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")" style="padding-top:1px">
+                        @*<img src="~/Content/img/DhiyaaishanbummiJPEG.jpg" class="img-responsive img-rounded">*@
+                        <img src="~/Content/img/Logo.png" alt="" class="img-responsive img-rounded">
+                        @*<img src="~/Content/img/DhiyaaishanbummiPNG.png" alt="" class="img-responsive img-rounded" />*@
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <div class="navbar-header" style="background-color:green; padding-top:2px">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse ">
+                @if (Session["userDetail"] != null)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>Hello,@(((TrueWheels.Web.Models.UserLoginDetailsViewModel)(Session["userDetail"])).User_Name)</li>
+                        <li>@Html.ActionLink("Logout", "LogOff", "TrueWheelsUser")</li>
+
+                    </ul>
+                }
+                else
+                {
+                    <div class="button navbar-right">
+                        <button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.8s" onclick="location.href= '@Url.Action("Login", "TrueWheelsUser")'">Login</button>
+                        <button class="navbar-btn nav-button wow fadeInRight" data-wow-delay="0.6s" onclick="location.href= '@Url.Action("SignUp", "TrueWheelsUser")'">Sign up</button>
+                    </div>
+                }
+                @*@if (Session["userDetail"] != null)
+                    {
+                        if (((TrueWheels.DAL.UserDetailsBEL)(Session["userDetail"])).User_ID == "0")
+                        {
+                            <div class="button navbar-right">
+                                <button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.8s" onclick="location.href= '@Url.Action("Login", "TrueWheelsUser")'">Login</button>
+                                <button class="navbar-btn nav-button wow fadeInRight" data-wow-delay="0.6s" onclick="location.href= '@Url.Action("SignUp", "TrueWheelsUser")'">Sign up</button>
+                            </div>
+                        }
+                        else
+                        { <div class="button navbar-right" style="font-family:Arial;font-size:18px;font-style:italic;padding-top:10px">
+                            <p><b> Hello @(((TrueWheels.DAL.UserDetailsBEL)(Session["userDetail"])).User_Name) </b></p>
+                              <button class="navbar-btn nav-button wow fadeInRight" data-wow-delay="0.6s" onclick="location.href= '@Url.Action("SignUp", "TrueWheelsUser")'">Sign up</button>
+                        </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="button navbar-right">
+                            <button class="navbar-btn nav-button wow bounceInRight login" data-wow-delay="0.8s" onclick="location.href= '@Url.Action("Login", "TrueWheelsUser")'">Login</button>
+                            <button class="navbar-btn nav-button wow fadeInRight" data-wow-delay="0.6s" onclick="location.href= '@Url.Action("SignUp", "TrueWheelsUser")'">Sign up</button>
+                        </div>
+                    }*@
+
+
+
+
+                <ul class="main-nav nav navbar-nav navbar-right">
+                    <li class="wow fadeInDown" data-wow-delay="0s">@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li class="wow fadeInDown disabled" data-wow-delay="0.1s"><a   href="@Url.Action("CreateSpace", "RentSpace")" >Rent out ur space</a></li>*@
+                    <li class="wow fadeInDown" data-wow-delay="0.2s">
+                        @if (Session["userDetail"] != null)
+                        {
+                            <a href="@Url.Action("Index", "UserDashBaord")">Dashboard</a>
+
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Login", "TrueWheelsUser")">Dashboard</a>
+                        }
+                    </li>
+
+                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a id="idHowitWorks" style="cursor:pointer">How it works</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="@Url.Action("Index", "Home")">Popular Parking</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.3s"><a id="idAboutUS" style="cursor:pointer">About us</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.5s"><a id="idContactUs" style="cursor:pointer">Contact</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <!-- <div class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+             <div class="navbar-header">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                     <span class="icon-bar"></span>
+                 </button>
+                 @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+             </div>
+             <div class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                 </ul>
+             </div>
+         </div>
+     </div>-->
+
+    <div class="row"><br /><br /></div>
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+    <div class="">
+        @*<footer class="fadeInDown">*@
+        @*<p>&copy; @DateTime.Now.Year - Ganeis</p>
+                </p>
+            </footer>*@
+        <footer class="footer-distributed">
+
+            <div class="footer-left">
+
+                <h3>Company<span>logo</span></h3>
+
+                <p class="footer-links">
+                    <a href="#">Home</a>
+                    ·
+                    <a href="#">Blog</a>
+                    ·
+                    <a href="#">Pricing</a>
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="#">Faq</a>
+                    ·
+                    <a href="#">Contact</a>
+                </p>
+
+                <p class="footer-company-name">@DateTime.Now.Year - Ganeis</p>
+            </div>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fa fa-map-marker"></i>
+                    <p><span>21 Revolution Street</span> Paris, France</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>+1 555 123456</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="mailto:support@company.com">support@company.com</a></p>
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p class="footer-company-about">
+                    <span>About the company</span>
+                    Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                </p>
+
+                <div class="footer-icons">
+
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-github"></i></a>
+
+                </div>
+
+            </div>
+
+        </footer>
+    </div>
+
+
+
+</body>
+</html>

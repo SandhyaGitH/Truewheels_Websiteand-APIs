@@ -1,0 +1,203 @@
+﻿@model TrueWheels.Web.Models.SignupViewModel
+
+@{
+    ViewBag.Title = "SignUp";
+    <link href="~/Content/Login/css/fontcss.css" rel="stylesheet" />
+    <link href="~/Content/Login/css/style.css" rel="stylesheet" />
+    <script src="~/Content/js/vendor/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="http://connect.facebook.net/en_US/all.js#appId=917438411698499&xfbml=1"></script>
+    <link href="http://localhost:21473/Content/Wrapper.css" rel="stylesheet" />
+
+
+    <script type="text/javascript">
+        function SendOTPMessage() {
+            alert("API will send message at this time(internally)");
+            var url2 = '@Url.Action("sendMessage", "OTPController")'
+            alert(url2);
+            //var url2 = "/OTPController/sendMessage";
+            $.post(url2, { number: 8527654844, message: 'Hi sandy plz be happy.leave the people those hurt u' }, function (data) {
+                
+               alert(data);
+                //error: function () {
+                //    alert("error");
+                //}
+
+            })
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+
+
+        FB.init({
+            appId: '917438411698499',
+            status: true,
+            cookie: true,
+            xfbml: true
+        });
+        function callFBLogin() {
+            FB.login(function (response) {
+                if (response.authResponse) {
+                    FB.api('/me', { fields: 'id,name,email,verified,birthday,first_name,last_name,picture' }, function (response) {
+                        alert("Recieved information: " + JSON.stringify(response))
+                       // alert(response.data.url)
+
+                        dosomething(response.first_name, response.last_name, response.email, response.id); //signup
+                        // @Url.Action("SignUp", "TrueWheelsUser")
+                        // You can send the required information to the server side for your custom needs
+                        // (like creating a local user for the site when somebody logs into the system using
+                        // facebook first time etc) from here.
+                    });
+                } else {
+                    alert("Access not authorized.");
+                }
+            }, { scope: 'email' });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function dosomething(firstName, lastName, emailId, fB_id) {
+            var url = '@Url.Action("SignUp", "TrueWheelsUser")';
+
+            //alert(url + "  " + url1);
+            var url = "/TrueWheelsUser/SignUpWithFB";
+            $.post(url, { FirstName: firstName, LastName: lastName, EmailId: emailId, FB_id: fB_id }, function (data) {
+                // $("#msg").html(data);
+                if (data == "True") {
+                    var url = "/UserDashbaord/Index";
+                    //var url1 = 'http://localhost:21473/UserDashbaord/Index';
+                    window.location = "http://" + window.location.host + url;
+                }
+
+            })
+        }
+
+
+    </script>
+
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                @Html.ValidationSummary(true)
+                <form role="form">
+                    <br />
+                    <h2>Please Sign Up <small>It's free and always will be.</small></h2>
+                    <hr class="colorgraph">
+                    @Html.ValidationMessageFor(model => model.FirstName)
+                    <div class="row">
+                        
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                           
+                            <div class="form-group">
+                                
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control input-lg", @placeholder = "First Name", @tabindex = "1", @type = "text" })
+                                @*<input type="text" name="FirstName" id="FirstName" class="form-control input-lg" placeholder="First Name" tabindex="1">*@
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="LastName" id="LastName" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.ValidationMessageFor(model => model.Mobile)
+                        @Html.TextBoxFor(m => m.Mobile, new {@id="Mob", @class = "form-control input-lg", @placeholder = "Mobile", @tabindex = "3", @onchange = "SendOTPMessage();" })
+                        @*<input type="text" name="Mobile" id="Mobile" class="form-control input-lg" placeholder="Mobile" tabindex="3">*@
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="EmailId" id="EmailId" class="form-control input-lg" placeholder="Email Address" tabindex="4">
+                    </div>
+                    <div class="row">
+                        @Html.ValidationMessageFor(model => model.Password)
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control input-lg", @placeholder = "Password", @tabindex = "5", @type = "password" })
+                                @*<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5">*@
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control input-lg", @placeholder = "Confirm Password", @tabindex = "6", @type = "password" })
+                                @*<input type="password" name="ConfirmPassword" id="ConfirmPassword" class="form-control input-lg" placeholder="Confirm Password" tabindex="6">*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-3 col-md-3">
+                            <span class="button-checkbox">
+                                <button type="button" class="btn" data-color="info" tabindex="7">I Agree</button>
+                                <input type="checkbox" name="t_and_c" id="t_and_c" class="hidden" value="1">
+                            </span>
+                        </div>
+                        <div class="col-xs-8 col-sm-9 col-md-9">
+                            By clicking <strong class="label label-primary">Register</strong>, you agree to the <a href="#" data-toggle="modal" data-target="#t_and_c_m">Terms and Conditions</a> set out by this site, including our Cookie Use.
+                        </div>
+                    </div>
+
+                    <hr class="colorgraph">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+
+                                <input type="submit" class="btn btn-lg btn-success btn-block" id="Register" value="Register" tabindex="7">
+                            </div>
+                            <div class="col-xs-12 col-md-6"><input value="Sign In" class="btn btn-primary btn-block btn-lg" tabindex="8" onclick="location.href= '@Url.Action("Login", "TrueWheelsUser")'"></div>
+                        </div>
+                    </fieldset>
+                    <div>
+                        <hr />
+                    </div>
+                    <div class="row">
+                        @*<a href="#" class="btn btn-success btn-block btn-lg">Sign In</a>*@
+                        <div class="col-xs-12 col-md-6">
+                            <a id="btn-fblogin" href="#" class="btn btn-primary" onclick="callFBLogin();">Login with Facebook</a>
+
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
+                            @*<a id="btn-Glogin" href="#" class="btn btn-primary">Connect with Google</a>*@
+
+                        </div>
+
+
+
+
+                    </div>
+                </form>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+}
+
+
+

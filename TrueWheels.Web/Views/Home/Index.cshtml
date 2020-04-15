@@ -1,0 +1,434 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script src="~/Scripts/jquery-ui.min.js"></script>
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*@
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#datepicker").datepicker({
+            minDate: 0
+        });
+
+
+        $("#idHowitWorks").click(function () {
+            $('html,body').animate({
+                scrollTop: $("#divHowitworks").offset().top
+            },
+                'slow');
+        });
+
+        $("#idContactUs").click(function () {
+            $('html,body').animate({
+                scrollTop: $("#divContactUs").offset().top
+            },
+                'slow');
+        });
+
+
+        $("#idAboutUS").click(function () {
+            $('html,body').animate({
+                scrollTop: $("#divAboutUS").offset().top
+            },
+                'slow');
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $("#textSearch").autocomplete({
+                source: '@Url.Action("GetLocations")',
+                autoFill: true
+
+            });
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#text").autocomplete({
+                source: '@Url.Action("GetLocations")',
+                autoFill: true
+            });
+        });
+    });
+</script>
+<div class="slider-area ">
+    <div class="row">
+
+        <div class="col-sm-12 col-sm-offset-0 ">
+            <div class="slider">
+                <div id="bg-slider" class="owl-carousel owl-theme">
+
+                    <div class="item"><img src="~/Content/img/slider-image-3.jpg" /></div>
+                    <div class="item"><img src="~/Content/img/slider-image-2.jpg" /></div>
+                    <div class="item"><img src="~/Content/img/slider-image-1.jpg" /></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container slider-content">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8  col-sm-offset-2 col-sm-offset-2 col-sm-offset-2">
+                <h2 class="yellow-text">Parking Search Just Got So Easy</h2>
+                <p class="yellow-text">Find Parking space where u want</p>
+                <div class="search-form wow pulse" data-wow-delay="0.8s">
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post,
+                        new { enctype = "multipart/form-data", @class = "form-inline" }))
+                    {
+
+                        @Html.AntiForgeryToken()
+                        @Html.TextBox("destination", null, new { id = "textSearch", @class = "form-control", @placeholder = "Where do you want park", @tabindex = "1" })
+                        <div class="form-group">
+
+                            @*new { @class = "form-control", @placeholder = "Where do you want park", @tabindex = "1", @type = "text" }*@
+                            @*<input type="text" class="form-control" name="destination" placeholder="Where do you want park">*@
+                        </div>
+                        @*<div class="form-group">
+                                <select name="" id="" class="form-control">
+                                    <option>Select Your City</option>
+                                    <option selected>New Delhi</option>
+                                    <option>Old Delhi</option>
+                                    <option>Gurgaon</option>
+                                    <option>Faridabad</option>
+                                </select>
+                            </div>*@
+
+                        <div class="form-group">
+                            <input type="text" id="datepicker" class="form-control" name="DateTimeFrom" placeholder="From DateTime">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control hidden-xm hidden-sm hidden-lg hidden-md" name="ToTimeFrom" placeholder="To DateTime">
+                        </div>
+                        <span class="glyphicon glyphicon-search"></span>
+                        <input type="submit" class="btn" value="Search" onclick="location.href= '@Url.Action("Index", "Home")'">
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-area">
+    <div class="container" id="divHowitworks">
+        <div class="row page-title text-center wow zoomInDown" data-wow-delay="1s">
+            <h5>Our Process</h5>
+            <h2>How we work for you?</h2>
+            <p>If you happen to be commuting from point A to point B for work, going on vacation or just planning a day trip: find your perfect parking space on TrueWheels. Maybe you could use a rental bike to get from the parking space to your appointment. Or you are looking to have some coffee first. You might need a dog sitter, or are looking for flexibility when coming and going during your vacation. All can be arranged through True Wheels.</p>
+        </div>
+        <div class="row how-it-work text-center">
+            <div class="col-md-4">
+                <div class="single-work wow fadeInUp" data-wow-delay="0.8s">
+                    <img src="~/Content/img/multi-storey-car-park.jpg" height="100" alt="" />
+                    <h3>Searching for the multy story parking</h3>
+                    <p>All parking on campus is allocated and signed for specific uses, and parking regulations are enforced 24/7. There are two basic options for visitor parking.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-work  wow fadeInUp" data-wow-delay="0.9s">
+                    <img src="~/Content/img/multi-storey-car-park.jpg" height="100" alt="" />
+                    <h3>Searching for the multy story parking</h3>
+                    <p>All parking on campus is allocated and signed for specific uses, and parking regulations are enforced 24/7. There are two basic options for visitor parking.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-work wow fadeInUp" data-wow-delay="1s">
+                    <img src="~/Content/img/multi-storey-car-park.jpg" height="100" alt="" />
+                    <h3>Searching for the multy story parking</h3>
+                    <p>All parking on campus is allocated and signed for specific uses, and parking regulations are enforced 24/7. There are two basic options for visitor parking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="divAboutUS" class="container">
+        @*<div class="row job-posting wow fadeInUp" data-wow-delay="1s">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#job-seekers" aria-controls="home" role="tab" data-toggle="tab">Job Seekers</a></li>
+                        <li role="presentation"><a href="#employeers" aria-controls="profile" role="tab" data-toggle="tab">Employeers</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade in active" id="job-seekers">
+                            <ul class="list-inline job-seeker">
+                                <li>
+                                    <a href="">
+                                        <img src="img/team-small-5.jpg" alt="">
+                                        <div class="overlay"><h3>Ohidul Islam</h3><p>Web Designer</p></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/team-small-6.jpg" alt="">
+                                        <div class="overlay"><h3>Mohidul Islam</h3><p>CEO</p></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/team-small-3.jpg" alt="">
+                                        <div class="overlay"><h3>Unknown girl</h3><p>Graphic Designer</p></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/team-small-4.jpg" alt="">
+                                        <div class="overlay"><h3>Eftakher Alam</h3><p>Graphic Designer</p></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/team-small-2.jpg" alt="">
+                                        <div class="overlay"><h3>Mark Otto</h3><p>Founder</p></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/team-small-1.jpg" alt="">
+                                        <div class="overlay"><h3>Rasel Ahmed</h3><p>Web Developer</p></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="employeers">
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="">
+                                        <img src="img/employee4.png" alt="">
+                                        <div class="overlay"><h3>Instagram</h3></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/employee5.png" alt="">
+                                        <div class="overlay"><h3>Microsoft</h3></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/employee6.png" alt="">
+                                        <div class="overlay"><h3>Dribbble</h3></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/employee1.png" alt="">
+                                        <div class="overlay"><h3>Beats Music</h3></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/employee2.png" alt="">
+                                        <div class="overlay"><h3>Facebook</h3></div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
+                                        <img src="img/employee3.png" alt="">
+                                        <div class="overlay"><h3>Twitter</h3></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="col-sm-12">
+            <div class="page-title">
+
+                <h1 style="text-align:center">About Us</h1>
+
+            </div>
+            <div class="page-content">
+
+                <div class="sfContentBlock">
+                    <h2>About CampusParc</h2> <p>CampusParc is responsible for the operation of The Ohio State University’s parking system, including management of the permit system, parking enforcement, customer service, motorist assistance, event parking management, and parking facility maintenance, including major renovations. The parking system, one of the largest of its kind, is comprised of 5 million square feet and 13,000 spaces within 16 garages, and 7 million square feet and 23,591 spaces within 196 surface lots, for a total of 36,591 system spaces.&nbsp;</p> <p>CampusParc operates the parking system through a 50-year lease, known as a parking concession, which began in September 2012. As a result of the concession, the university received a one-time, up-front payment of $483 million that is expected to provide $3.1 billion in investment earnings for academic initiatives. In the first 24 months of the concession, the initial $483 million created $112 million in interest, funding teaching, learning, research, transportation, and sustainability.&nbsp; Click&nbsp;<a href="/home/about-us/corporate-office/concession-101">here</a>&nbsp;to learn more about the concession agreement between CampusParc and Ohio State.</p> <div>
+                        <h2>Our Mission</h2> <p>To provide safe, efficient campus parking and good&nbsp;<span style="line-height: 1.5;">stewardship of the parking system assets and to achieve&nbsp;</span><span style="line-height: 1.5;">the investment expectations of our investors<br> </span></p> <h2>Our Objectives</h2> <h3>Partnership</h3> <p>Develop a partnership relationship with the university and&nbsp;support its Strategic Framework.</p> <h3>Assets</h3> <p>Maintain the parking system assets in accordance&nbsp;with the Operating Standards and the dictates of good&nbsp;stewardship. </p> <h3>Rewarding</h3> <p>Provide a secure, rewarding, and professionally&nbsp;challenging work environment for our people and achieve&nbsp;the investment expectations of our investors.</p> <h3>
+                            Continuous Improvement
+                        </h3> <p>
+                            Continuously improve the quality of service and the&nbsp;parking experience including the introduction of new&nbsp;parking and wayfinding technologies.
+                        </p> <h3>
+                            Safety
+                        </h3> <p>
+                            Provide safe, secure, efficient parking on campus.
+                        </p> <h2>Our Values</h2> <h3>Integrity</h3> <p>We are open and honest. We trust each other and our&nbsp;<span style="line-height: 1.5;">external partners and work to be trusted in return.</span></p> <h3>Collaboration</h3> <p>We work together with our partners and contribute our&nbsp;<span style="line-height: 1.5;">capabilities through open and effective communication to&nbsp;</span><span style="line-height: 1.5;">achieve our collective goals.</span></p> <h3>Accountability</h3> <p>We deliver on what we promise. We take ownership of&nbsp;<span style="line-height: 1.5;">our decisions and responsibility for our actions. We are&nbsp;</span><span style="line-height: 1.5;">proactive in identifying and resolving problems.</span></p> <h3>Respect</h3> <p>We appreciate and consider diversity of views, cultures,&nbsp;<span style="line-height: 1.5;">and safety of each other and the environment.</span></p> <h3>Excellence</h3> <p>We embrace professionalism, change, and flexibility and&nbsp;<span style="line-height: 1.5;">strive to exceed expectations.</span></p>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    <div class="container" id="divContactUs">
+        <div class="row page-title text-center wow bounce" data-wow-delay="1s">
+            <h5>Recent Jobs</h5>
+            <h2><span>54716</span> Available jobs for you</h2>
+        </div>
+        <div class="row jobs">
+            <div class="col-md-9">
+                <div class="job-posts table-responsive">
+                    <table class="table">
+                        <tr class="odd wow fadeInUp" data-wow-delay="1s">
+                            <td class="tbl-logo"><img src="img/job-logo1.png" alt=""></td>
+                            <td class="tbl-title"><h4>Web Designer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>dribbble community</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="even wow fadeInUp" data-wow-delay="1.1s">
+                            <td class="tbl-logo"><img src="img/job-logo2.png" alt=""></td>
+                            <td class="tbl-title"><h4>Front End Developer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Jolil corporation</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="odd wow fadeInUp" data-wow-delay="1.2s">
+                            <td class="tbl-logo"><img src="img/job-logo3.png" alt=""></td>
+                            <td class="tbl-title"><h4>HR Manager <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Fanta bevarage</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="even wow fadeInUp" data-wow-delay="1.3s">
+                            <td class="tbl-logo"><img src="img/job-logo4.png" alt=""></td>
+                            <td class="tbl-title"><h4>Internship Designer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Google</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="odd wow fadeInUp" data-wow-delay="1.4s">
+                            <td class="tbl-logo"><img src="img/job-logo5.png" alt=""></td>
+                            <td class="tbl-title"><h4>Software Designer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Microsoft</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="even hide-jobs">
+                            <td class="tbl-logo"><img src="img/job-logo4.png" alt=""></td>
+                            <td class="tbl-title"><h4>Internship Designer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Google</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="odd hide-jobs">
+                            <td class="tbl-logo"><img src="img/job-logo5.png" alt=""></td>
+                            <td class="tbl-title"><h4>Software Designer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Microsoft</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="even hide-jobs">
+                            <td class="tbl-logo"><img src="img/job-logo4.png" alt=""></td>
+                            <td class="tbl-title"><h4>Internship Designer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Google</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                        <tr class="odd hide-jobs">
+                            <td class="tbl-logo"><img src="img/job-logo5.png" alt=""></td>
+                            <td class="tbl-title"><h4>Software Designer <br><span class="job-type">full time</span></h4></td>
+                            <td><p>Microsoft</p></td>
+                            <td><p><i class="icon-location"></i>San Franciso, USA</p></td>
+                            <td><p>&dollar; 14000</p></td>
+                            <td class="tbl-apply"><a href="#">Apply now</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="more-jobs">
+                    <a href=""> <i class="fa fa-refresh"></i>View more jobs</a>
+                </div>
+            </div>
+            <div class="col-md-3 hidden-sm">
+                <div class="job-add wow fadeInRight" data-wow-delay="1.5s">
+                    <h2>Seeking a job?</h2>
+                    <a href="#">Create a Account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container" id="divContactUs">
+        <div class="row page-title text-center  wow bounce" data-wow-delay=".7s">
+            <h5>TESTIMONIALS</h5>
+            <h2>WHAT PEOPLES ARE SAYING</h2>
+        </div>
+        <div class="row testimonial">
+            <div class="col-md-12">
+                <div id="testimonial-slider">
+                    <div class="item">
+                        <div class="client-text">
+                            <p>
+                                Jobify offer an amazing service and I couldn’t be happier! They
+                                are dedicated to helping recruiters find great candidates, wonderful service!
+                            </p>
+                            <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                        </div>
+                        <div class="client-face wow fadeInRight" data-wow-delay=".9s">
+                            <img src="img/client-face1.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="client-text">
+                            <p>
+                                Jobify offer an amazing service and I couldn’t be happier! They
+                                are dedicated to helping recruiters find great candidates, wonderful service!
+                            </p>
+                            <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                        </div>
+                        <div class="client-face">
+                            <img src="img/client-face2.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="client-text">
+                            <p>
+                                Jobify offer an amazing service and I couldn’t be happier! They
+                                are dedicated to helping recruiters find great candidates, wonderful service!
+                            </p>
+                            <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                        </div>
+                        <div class="client-face">
+                            <img src="img/client-face1.png" alt="">
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="client-text">
+                            <p>
+                                Jobify offer an amazing service and I couldn’t be happier! They
+                                are dedicated to helping recruiters find great candidates, wonderful service!
+                            </p>
+                            <h4><strong>Ohidul Islam, </strong><i>Web Designer</i></h4>
+                        </div>
+                        <div class="client-face">
+                            <img src="img/client-face2.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

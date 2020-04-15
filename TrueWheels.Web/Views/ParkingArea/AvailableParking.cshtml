@@ -1,0 +1,82 @@
+﻿@model List<TrueWheels.BEL.AvailableParkingAreaResult>
+<script src="~/Content/js/vendor/jquery-1.10.2.min.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    #markers_info .marker {
+        height: 40px;
+        cursor: pointer;
+    }
+
+
+    .labels {
+        color: white;
+        background-color: red;
+        font-family: "Lucida Grande", "Arial", sans-serif;
+        font-size: 10px;
+        text-align: center;
+        width: 30px;
+        white-space: nowrap;
+    }
+</style>
+<script type="text/javascript">
+    $.fn.stars = function () {
+        return $(this).each(function () {
+            // Get the value
+            var val = parseFloat($(this).html());
+            // Make sure that the value is in 0 - 5 range, multiply to get width
+            var size = Math.max(0, (Math.min(5, val))) * 16;
+            // Create stars holder
+            var $span = $('<span />').width(size);
+            // Replace the numerical value with stars
+            $(this).html($span);
+        });
+    }
+    $(function () {
+        $('span.stars').stars();
+    });
+</script>
+
+
+<div class="col-lg-3" style="overflow:scroll ;height:80vh">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            Sort By
+            <span class="caret"></span>
+        </button>
+        <ul id="SortOrder" class="dropdown-menu">
+            <li><a href="#" onclick="load('Distance')">Distance</a></li>
+            <li><a href="#" onclick="load('Basic Charge')">Basic Charge</a></li>
+            <li><a href="#" onclick="load('Rating')">Rating</a></li>
+        </ul>
+    </div>
+
+    <div class="list-group  " id="markers_info">
+        @{
+            var i = 1;
+            foreach (var item in Model)
+            {
+
+                <a href="#" class="list-group-item marker" style="height:auto; color:#0026ff" onclick='showMap(@item.lattitude,@item.longitude,"@item.parking_address",@item.Parking_id)'>
+                    <span class="badge" style="color: #dff">@i</span>
+
+                    <span>@item.parking_address</span>
+                    <br />
+                    <span>@item.BasicCharge</span>
+                    <span>@item.Distance</span>
+                    @*@item.parking_address<br />*@
+                    @*@item.BasicCharge<br />*@
+                    @*@item.Rating<br />
+                        @item.Distance<br />*@
+                    <span class="stars">@item.Rating</span>
+                </a>
+
+                i = i + 1;
+
+            }
+        }
+    </div>
+</div>
+
+

@@ -1,0 +1,177 @@
+﻿@model IEnumerable<TrueWheels.BEL.AvailableParkingAreaResult>
+<html>
+<head>
+    <title>Index</title>
+     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+        <script src="@Url.Content("~/Content/Jquery/tablesorter/themes/blue/style.css")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Content/Jquery/tablesorter/jquery.tablesorter.js")" type="text/javascript"></script>
+        <script src="@Url.Content("~/Content/Jquery/tablesorter/addons/pager/jquery.tablesorter.pager.js")" type="text/javascript"></script>
+        <script type="text/javascript">
+        $(function () {
+            $("table.tablesorter").tablesorter({ widthFixed: true, sortList: [[0, 0]] })
+            .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
+
+        });
+
+        </script>
+
+   
+</head>
+<body>
+    <table id="myTable" class="tablesorter">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Parking_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.parking_address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lattitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GeoLoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.No_Of_Space_Avaiable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detail_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasicCharge)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParkingClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Distance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Facilities)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpaceType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PropertyType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ErrorMessage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Success)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parking_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.parking_address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.street)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.state)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lattitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.longitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GeoLoc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.No_Of_Space_Avaiable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detail_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasicCharge)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParkingClass)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Facilities)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpaceType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ErrorMessage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Success)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

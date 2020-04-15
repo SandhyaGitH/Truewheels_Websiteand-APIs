@@ -1,0 +1,84 @@
+﻿@model TrueWheels.Web.Models.OTPViewModel
+@{
+    ViewBag.Title = "VerifyOTP";
+    
+    <script src="~/Content/js/vendor/jquery-1.10.2.min.js"></script>
+    }
+<script type="text/javascript">
+        function SendOTPMessage() {   
+            alert("API will send message at this time");
+        } 
+</script>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('#btn').click();
+    });
+
+</script>
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+       // if(Session["confirmed"]==null)
+        $("#modal").show();
+    });
+</script>*@
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <h2>Mobile Number Verification </h2>
+    </div>
+
+    <div class="row">
+        <!-- Large modal -->
+        @*<input style="margin-bottom: 15px;" onchange="SendOTPMessage();" type="text" placeholder="Enter 6 digit OTP" id="Test" maxlength="6" name="Test">*@
+        <div style="padding: 15px; padding-bottom: 0px;">
+            <form method="post" action="VerifyOTP" accept-charset="UTF-8">
+                <p class="text-danger">
+                    @ViewBag.Error
+                </p>
+                <input style="margin-bottom: 15px;" type="text" placeholder="Enter 6 digit OTP" id="OTP" maxlength="6" name="OTP">
+
+                <input class="btn btn-primary" type="submit" id="Verify" value="Confirm">
+                <label style="text-align:center;margin-top:5px">or</label>
+                <input class="btn btn-primary" type="button" id="ResendOTP" value="Resend OTP">
+
+            </form>
+        </div>
+    </div>
+        <button type="button" id="btn" class="btn btn-primary" data-toggle="modal" style="visibility:hidden" data-target=".bs-example-modal-lg">Windows 8 modal - Click to View</button>
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        <h2>OTP Verification!</h2>
+                        <h4>Verify OTP Sent on your Phone Number.</h4>
+                        <p class="text-danger">
+                            @ViewBag.Error
+                        </p>
+                        <div style="padding: 15px; padding-bottom: 0px;">
+                            <form method="post" action="VerifyOTP" accept-charset="UTF-8">
+                                <input style="margin-bottom: 15px;" type="text" placeholder="Enter 6 digit OTP" id="OTP" pattern="{3}[0-9]{4}" maxlength="6" name="OTP">
+                               
+                                <input class="btn btn-primary" type="submit" id="Verify" value="Confirm" formaction="VerifyOTP" formmethod="post" />
+                                <label style="text-align:center;margin-top:5px">or</label>
+                                <input class="btn btn-primary" type="submit" id="ResendOTP" value="Resend OTP" formaction="ResendOTP" formmethod="post" />
+                                
+                            </form>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+
+
+</div>
+

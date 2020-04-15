@@ -1,0 +1,659 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CBDF7583-6D99-4FE2-95C4-5DD15FA9A4A7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TrueWheels.Web</RootNamespace>
+    <AssemblyName>TrueWheels.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Excel">
+      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="HttpResponses">
+      <HintPath>..\packages\HttpResponses.1.1.1\lib\HttpResponses.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.0.0\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.SelfHost.4.0.30506.0\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.0.1\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.0.0.0\lib\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ForgotPasswordController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OTPController.cs" />
+    <Compile Include="Controllers\InterpretersAPIController.cs" />
+    <Compile Include="Controllers\TrueWheelsUserController.cs" />
+    <Compile Include="Controllers\UserDashBoardAPIController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddCommentViewModel.cs" />
+    <Compile Include="Models\DashBaordViewModal.cs" />
+    <Compile Include="Models\LocateParkingViewModel.cs" />
+    <Compile Include="Models\OTPViewModel.cs" />
+    <Compile Include="Models\ParkingAreaViewModel.cs" />
+    <Compile Include="Models\RentYourSpaceViewModel.cs" />
+    <Compile Include="Models\SearchParking.cs" />
+    <Compile Include="Models\AddPostViewModel.cs" />
+    <Compile Include="Models\SignupViewModel.cs" />
+    <Compile Include="Models\UpdateCred.cs" />
+    <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\PostDetailsViewModel.cs" />
+    <Compile Include="Models\UserLoginDetailsViewModel.cs" />
+    <Compile Include="Models\UserMaintenanceViewModel.cs" />
+    <Compile Include="Models\UserRegistrationViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\SMSService4India\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\fontello.css" />
+    <Content Include="Content\css\jquery.timepicker.css" />
+    <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\owl.carousel.css" />
+    <Content Include="Content\css\owl.theme.css" />
+    <Content Include="Content\css\owl.transitions.css" />
+    <Content Include="Content\css\truewheels.css" />
+    <Content Include="Content\DashBoard.css" />
+    <Content Include="Content\external\jquery\jquery.js" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\fontello\fontello.svg" />
+    <Content Include="Content\images\profilePicture\81.png" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\img\client-face1.png" />
+    <Content Include="Content\img\client-face2.png" />
+    <Content Include="Content\img\DhiyaaishanbummiPNG.png" />
+    <Content Include="Content\img\employee1.png" />
+    <Content Include="Content\img\employee2.png" />
+    <Content Include="Content\img\employee3.png" />
+    <Content Include="Content\img\employee4.png" />
+    <Content Include="Content\img\employee5.png" />
+    <Content Include="Content\img\employee6.png" />
+    <Content Include="Content\img\footer-logo.png" />
+    <Content Include="Content\img\how-work1.png" />
+    <Content Include="Content\img\how-work2.png" />
+    <Content Include="Content\img\how-work3.png" />
+    <Content Include="Content\img\job-add.png" />
+    <Content Include="Content\img\job-logo1.png" />
+    <Content Include="Content\img\job-logo2.png" />
+    <Content Include="Content\img\job-logo3.png" />
+    <Content Include="Content\img\job-logo4.png" />
+    <Content Include="Content\img\job-logo5.png" />
+    <Content Include="Content\img\Logo.png" />
+    <Content Include="Content\img\logo1.png" />
+    <Content Include="Content\img\preloader.gif" />
+    <Content Include="Content\img\slider-image-1.jpg" />
+    <Content Include="Content\img\slider-image-11.jpg" />
+    <Content Include="Content\img\slider-image-2.jpg" />
+    <Content Include="Content\img\slider-image-21.jpg" />
+    <Content Include="Content\img\slider-image-22.jpg" />
+    <Content Include="Content\img\slider-image-3.jpg" />
+    <Content Include="Content\img\slider-image-31.jpg" />
+    <Content Include="Content\img\team-small-1.jpg" />
+    <Content Include="Content\img\team-small-2.jpg" />
+    <Content Include="Content\img\team-small-3.jpg" />
+    <Content Include="Content\img\team-small-4.jpg" />
+    <Content Include="Content\img\team-small-5.jpg" />
+    <Content Include="Content\img\team-small-6.jpg" />
+    <Content Include="Content\img\wall1.jpg" />
+    <Content Include="Content\img\wall2.jpg" />
+    <Content Include="Content\img\wall4.jpg" />
+    <Content Include="Content\img\wall5.jpg" />
+    <Content Include="Content\img\wall6.jpg" />
+    <Content Include="Content\img\wall7.jpg" />
+    <Content Include="Content\img\wall9.jpg" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.min.css" />
+    <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\jquery.tablesorter.pager.css" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\jquery.tablesorter.pager.js" />
+    <Content Include="Content\Jquery\tablesorter\build.xml" />
+    <Content Include="Content\Jquery\tablesorter\build\js.jar" />
+    <Content Include="Content\Jquery\tablesorter\build\jsmin.js" />
+    <Content Include="Content\Jquery\tablesorter\build\min.js" />
+    <Content Include="Content\Jquery\tablesorter\build\pack.js" />
+    <Content Include="Content\Jquery\tablesorter\build\packer.js" />
+    <Content Include="Content\Jquery\tablesorter\build\ParseMaster.js" />
+    <Content Include="Content\Jquery\tablesorter\build\writeFile.js" />
+    <Content Include="Content\Jquery\tablesorter\docs\assets\ajax-content.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\css\jq.css" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-ajax.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-empty-table.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-extending-defaults.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-meta-headers.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-meta-parsers.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-meta-sort-list.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-option-debug.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-option-digits.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-option-sort-force.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-option-sort-key.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-option-sort-list.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-option-sort-order.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-option-text-extraction.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-options-headers.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-pager.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-parsers.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-trigger-sort.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-triggers.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-update-cell.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\example-widgets.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\img\external.png" />
+    <Content Include="Content\Jquery\tablesorter\docs\index.html" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\docs.js" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\examples.js" />
+    <Content Include="Content\Jquery\tablesorter\jquery-latest.js" />
+    <Content Include="Content\Jquery\tablesorter\jquery.metadata.js" />
+    <Content Include="Content\Jquery\tablesorter\jquery.tablesorter.js" />
+    <Content Include="Content\Jquery\tablesorter\jquery.tablesorter.min.js" />
+    <Content Include="Content\Jquery\tablesorter\tests\assets\ajax-content.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\cell.metadata.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\checkbox.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\colspan.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\demo.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\index.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\large.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\lockedOrder.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\metadata.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\multiple-headers.html" />
+    <Content Include="Content\Jquery\tablesorter\tests\pager.html" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\asc.gif" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\bg.gif" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\desc.gif" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\style.css" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\asc.png" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\bg.png" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\desc.png" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\style.css" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery.tablesorter.widgets.js" />
+    <Content Include="Content\js\jquery.timepicker.min.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\owl.carousel.min.js" />
+    <Content Include="Content\js\plugins.js" />
+    <Content Include="Content\js\vendor\jquery-1.10.2.min.js" />
+    <Content Include="Content\js\vendor\jquery-ui.js" />
+    <Content Include="Content\js\vendor\jquery.unobtrusive-ajax.js" />
+    <None Include="Content\js\vendor\jquery.validate-vsdoc.js" />
+    <Content Include="Content\js\vendor\jquery.validate.js" />
+    <Content Include="Content\js\vendor\jquery.validate.min.js" />
+    <Content Include="Content\js\vendor\jquery.validate.unobtrusive.js" />
+    <Content Include="Content\js\vendor\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Content\js\vendor\modernizr-2.6.2.min.js" />
+    <Content Include="Content\js\wow.js" />
+    <Content Include="Content\Login\css\fontcss.css" />
+    <Content Include="Content\Login\css\style.css" />
+    <Content Include="Content\Login\js\fancybar.js" />
+    <Content Include="Content\responsive.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\Wrapper.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\fontello\fontello.eot" />
+    <Content Include="Content\fonts\fontello\fontello.ttf" />
+    <Content Include="Content\fonts\fontello\fontello.woff" />
+    <Content Include="Js\comman.js" />
+    <Content Include="Content\Jquery\tablesorter\addons\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\addons\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\.svn\prop-base\jquery.tablesorter.pager.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\.svn\prop-base\jquery.tablesorter.pager.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\.svn\text-base\jquery.tablesorter.pager.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\addons\pager\.svn\text-base\jquery.tablesorter.pager.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\prop-base\js.jar.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\prop-base\jsmin.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\prop-base\min.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\prop-base\pack.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\prop-base\packer.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\prop-base\ParseMaster.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\prop-base\writeFile.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\text-base\js.jar.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\text-base\jsmin.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\text-base\min.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\text-base\pack.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\text-base\packer.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\text-base\ParseMaster.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\build\.svn\text-base\writeFile.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\changelog" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-ajax.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-empty-table.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-extending-defaults.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-meta-headers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-meta-parsers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-meta-sort-list.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-option-debug.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-option-digits.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-option-sort-force.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-option-sort-key.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-option-sort-list.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-option-sort-order.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-option-text-extraction.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-options-headers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-pager.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-parsers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-trigger-sort.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-triggers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-update-cell.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\example-widgets.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\prop-base\index.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-ajax.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-empty-table.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-extending-defaults.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-meta-headers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-meta-parsers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-meta-sort-list.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-option-debug.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-option-digits.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-option-sort-force.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-option-sort-key.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-option-sort-list.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-option-sort-order.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-option-text-extraction.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-options-headers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-pager.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-parsers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-trigger-sort.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-triggers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-update-cell.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\example-widgets.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.svn\text-base\index.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\.tmp_index.html.55071~" />
+    <Content Include="Content\Jquery\tablesorter\docs\assets\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\docs\assets\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\docs\assets\.svn\prop-base\ajax-content.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\assets\.svn\text-base\ajax-content.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\css\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\docs\css\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\docs\css\.svn\prop-base\jq.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\css\.svn\text-base\jq.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\img\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\docs\img\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\docs\img\.svn\prop-base\external.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\img\.svn\text-base\external.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\.svn\prop-base\docs.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\.svn\prop-base\examples.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\.svn\text-base\docs.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\docs\js\.svn\text-base\examples.js.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\cell.metadata.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\checkbox.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\colspan.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\demo.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\index.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\large.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\lockedOrder.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\metadata.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\multiple-headers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\prop-base\pager.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\cell.metadata.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\checkbox.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\colspan.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\demo.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\index.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\large.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\lockedOrder.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\metadata.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\multiple-headers.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\.svn\text-base\pager.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\assets\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\tests\assets\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\tests\assets\.svn\prop-base\ajax-content.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\tests\assets\.svn\text-base\ajax-content.html.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\themes\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\prop-base\asc.gif.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\prop-base\bg.gif.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\prop-base\blue.zip.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\prop-base\desc.gif.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\prop-base\style.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\text-base\asc.gif.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\text-base\bg.gif.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\text-base\blue.zip.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\text-base\desc.gif.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\.svn\text-base\style.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\blue\blue.zip" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\all-wcprops" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\entries" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\prop-base\asc.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\prop-base\bg.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\prop-base\desc.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\prop-base\green.zip.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\prop-base\style.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\text-base\asc.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\text-base\bg.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\text-base\desc.png.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\text-base\green.zip.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\.svn\text-base\style.css.svn-base" />
+    <Content Include="Content\Jquery\tablesorter\themes\green\green.zip" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.2.0.debug.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <None Include="Scripts\_references.js" />
+    <None Include="Service References\SMSService4India\configuration91.svcinfo" />
+    <None Include="Service References\SMSService4India\configuration.svcinfo" />
+    <None Include="Service References\SMSService4India\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\TrueWheelsUser\Index.cshtml" />
+    <Content Include="Views\TrueWheelsUser\Create.cshtml" />
+    <Content Include="Views\TrueWheelsUser\SignUp.cshtml" />
+    <Content Include="Views\TrueWheelsUser\Login.cshtml" />
+    <Content Include="Views\ParkingArea\Index.cshtml" />
+    <Content Include="Views\TrueWheelsUser\ForgotPassword.cshtml" />
+    <Content Include="Views\UserDashBaord\Index.cshtml" />
+    <Content Include="Views\RentSpace\CreateSpace.cshtml" />
+    <Content Include="Views\ParkingArea\LocateParkingArea.cshtml" />
+    <Content Include="Views\OTP\VerifyOTP.cshtml" />
+    <None Include="Service References\SMSService4India\SendSMS.wsdl" />
+    <Content Include="Service References\SMSService4India\TrueWheels.Web.SMSService4India.SMSResult.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Views\RentSpace\UploadSpace.cshtml" />
+    <Content Include="Views\ForgotPassword\Index.cshtml" />
+    <Content Include="Views\UserDashBaord\_InviteFriends.cshtml" />
+    <Content Include="Views\UserDashBaord\_Inbox.cshtml" />
+    <Content Include="Views\ParkingArea\_ListParking.cshtml" />
+    <Content Include="Views\ParkingArea\AvailableParking.cshtml" />
+    <Content Include="Views\UserDashBaord\_FollowUs.cshtml" />
+    <Content Include="Views\UserDashBaord\_Personalinfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\.svn\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\.svn\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\pager\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\pager\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\pager\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\addons\pager\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\build\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\build\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\build\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\build\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\assets\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\assets\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\assets\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\assets\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\css\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\css\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\css\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\css\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\img\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\img\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\img\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\img\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\js\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\js\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\js\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\docs\js\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\assets\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\assets\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\assets\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\tests\assets\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\.svn\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\.svn\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\blue\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\blue\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\blue\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\blue\.svn\tmp\text-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\green\.svn\props\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\green\.svn\tmp\prop-base\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\green\.svn\tmp\props\" />
+    <Folder Include="Content\Jquery\tablesorter\themes\green\.svn\tmp\text-base\" />
+    <Folder Include="Log\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrueWheels.BEL\TrueWheels.BEL.csproj">
+      <Project>{cf2fa2fb-f74e-4cbd-b33f-718d1da178df}</Project>
+      <Name>TrueWheels.BEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrueWheels.DEL\TrueWheels.DAL.csproj">
+      <Project>{4fbc2d59-e2a4-4359-8fa7-fd7858ba3979}</Project>
+      <Name>TrueWheels.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SMSService4India\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

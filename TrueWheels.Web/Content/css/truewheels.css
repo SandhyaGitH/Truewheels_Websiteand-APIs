@@ -1,0 +1,82 @@
+@font-face {
+  font-family: 'fontello';
+  src: url('../fonts/fontello/fontello.eot?76007318');
+  src: url('../fonts/fontello/fontello.eot?76007318#iefix') format('embedded-opentype'),
+       url('../fonts/fontello/fontello.woff?76007318') format('woff'),
+       url('../fonts/fontello/fontello.ttf?76007318') format('truetype'),
+       url('../fonts/fontello/fontello.svg?76007318#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?76007318#fontello') format('svg');
+  }
+}
+*/
+ .slider-content{
+	color:yellow;
+ }
+ .slider-content h2{
+	color:yellow;
+ }
+
+ .floatRight
+{
+    float: right;
+}
+
+ #btnEditProfile
+{
+    top: 44px;
+    right: 6px;
+    position: absolute;
+    height: 30px;
+    width: 82px;
+    border: none;
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+
+  #btnClose
+{
+    top: 44px;
+    right: 6px;
+    position: absolute;
+    height: 30px;
+    width: 82px;
+    border: none;
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+
+
+  input[type=button] {
+	padding: 17px 30px;
+	color: #fff;
+	float: right;
+	font-family: 'Oxygen', sans-serif;
+	background: #40A46F;
+	border: 1px solid #40A46F;
+	cursor: pointer;
+	font-size: 18px;
+	transition: all 0.5s ease-out;
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	outline:none;
+	width: 100%;
+	-webkit-appearance: none;
+}
+
+
+ .border
+{
+    border: 3px solid #62c2e4;
+    border-radius:10px;
+}
+

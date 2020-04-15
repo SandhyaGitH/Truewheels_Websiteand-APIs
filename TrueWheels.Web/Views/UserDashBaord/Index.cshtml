@@ -1,0 +1,297 @@
+﻿@*@model IEnumerable<TrueWheels.Web.Models.DashBaordViewModal>*@
+@*@model List<TrueWheels.Web.Models.DashBaordViewModal>*@
+@model    TrueWheels.Web.Models.UserMaintenanceViewModel
+
+@{
+    ViewBag.Title = "Index";
+    <link href="~/Content/Login/css/fontcss.css" rel="stylesheet" />
+    <link href="~/Content/Login/css/style.css" rel="stylesheet" />
+    <link href="~/Content/DashBoard.css" rel="stylesheet" />
+    Html.EnableClientValidation(true);
+}
+
+
+<style>
+    body {
+        font-size: 13px;
+        font-family: 'Open Sans','arial';
+        line-height: 23px;
+        font-weight: 400;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .profiletextbox {
+        margin: 0px 40px 15px 0px;
+        float: right;
+    }
+
+    .profileEditLabel {
+        margin: 0px 40px 15px 20px;
+    }
+
+    .txtboxPassword {
+        width: 80% !important;
+        margin-left: 8%;
+        margin-top: 2%;
+    }
+</style>
+
+
+
+<div class="container border">
+    <div style="background-color:#62c2e4;margin-left:-15px;margin-right:-15px;height:30px;">
+        <h1 style="font-size:20px;font-weight:bold;margin-left:10px;">User Profile Page</h1>
+    </div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div id="profileInfoPanel" class="row profile" style="background-color:lightgrey">
+
+            <div class="col-md-3 row">
+                <div class="profile-sidebar">
+                    <!-- SIDEBAR USERPIC -->
+                    <div style="height:10px;background-color:white;margin-left:10px"></div>
+
+                    <div class="profile-userpic">
+                        <img src="~/Content/images/profilePicture/@Model.Personalinfo.profilePic_Path" class="img-responsive" alt="@Model.Personalinfo.Full_Name">
+                    </div>
+                    <!-- END SIDEBAR USERPIC -->
+                    <!-- SIDEBAR USER TITLE -->
+
+                    <div class="profile-usertitle">
+                        @*@if (Session["userDetail"] != null)
+                            {*@
+                        <div class="profile-usertitle-name">
+                            <span>@(Model.Personalinfo.Full_Name) </span>
+                        </div>
+                        <div class="profile-usertitle-job">
+                            <span>@(Model.Personalinfo.MobileNo) </span>
+                        </div>
+                        @*}
+                            else
+                            {
+                                 <div class="profile-usertitle-name">
+                                    <span>Name</span>
+                                </div>
+                                <div class="profile-usertitle-job">
+                                    <span>Mobile </span>
+                                </div>
+                            }*@
+
+                    </div>
+                    <!-- END SIDEBAR USER TITLE -->
+                    <!-- SIDEBAR BUTTONS -->
+                    <div class="profile-userbuttons" style="visibility:hidden">
+                        <button type="button" class="btn btn-success btn-sm">Follow</button>
+                        <button type="button" class="btn btn-danger btn-sm">Message</button>
+                    </div>
+                    <!-- END SIDEBAR BUTTONS -->
+                    <!-- SIDEBAR MENU -->
+                    <div class="profile-usermenu">
+                        <ul class="nav">
+                            @if (Model != null)
+                            {
+
+                                foreach (var item in @ViewBag.DashBoardMenu)
+                                {
+                                    <li class="active">
+                                        <a id="Dashboardid-@item.Menu_id" style="cursor:pointer;">
+                                            <i class="glyphicon glyphicon-home"></i>
+                                            <b>  @item.Menu_description </b>
+                                        </a>
+                                        @*<ul>
+
+                                                <li class="active">
+                                                    <a href="#">
+                                                        <i class="glyphicon glyphicon-home"></i>
+                                                        <b> Subitem </b>
+                                                    </a>
+                                                </li>
+                                                <li class="active">
+                                                    <a href="#">
+                                                        <i class="glyphicon glyphicon-home"></i>
+                                                        <b> Subitem2 </b>
+                                                    </a>
+                                                </li>
+
+                                            </ul>*@
+                                    </li>
+
+                                }
+                            }
+                            else
+                            {
+                                <li class="active">
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-home"></i>
+                                        Overview
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-user"></i>
+                                        Account Settings
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" target="_blank">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        Tasks
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="glyphicon glyphicon-flag"></i>
+                                        Help
+                                    </a>
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                    <!-- END MENU -->
+                </div>
+            </div>
+            <div id="userprofile" class="col-md-9 col-sm-12">
+
+                @Html.Partial("~/Views/UserDashbaord/_Personalinfo.cshtml", Model.Personalinfo)
+
+            </div>
+
+        </div>
+    }
+</div>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+
+    </p>*@
+<script>
+    $(document).ready(function () {
+
+        $(".txtboxPassword").val("");
+
+
+        $("#oldpassword").keydown(function () {
+
+        });
+
+        $("#idHowitWorks").click(function () {
+            var url = '@Url.Action("Index","Home")';
+            window.location.href = url;
+
+            $('html, body').animate({
+                scrollTop: $("#divHowitworks").offset().top
+            }, 'slow');
+        });
+
+        $("#idContactUs").click(function () {
+            var url = '@Url.Action("Index","Home")';
+            window.location.href = url;
+
+            $('html, body').animate({
+                scrollTop: $("#divContactUs").offset().top
+            }, 'slow');
+        });
+
+        $("#idAboutUS").click(function () {
+            var url = '@Url.Action("Index","Home")';
+            window.location.href = url;
+
+            $('html, body').animate({
+                scrollTop: $("#divAboutUS").offset().top
+            }, 'slow');
+        });
+
+
+        $("#Dashboardid-11").click(function () {
+            $.ajax({
+                url: '@Url.Action("InviteFriends")',
+                type: 'GET',
+                dataType: 'html',
+                contentType: 'application/html; charset-utf-8',
+                success: function (names) {
+                    $("#userprofile").html('');
+                    $("#userprofile").html(names);
+                },
+                error: function (ex) {
+                    alert("Failed to retreive" + ex);
+                }
+            });
+        });
+
+        $("#Dashboardid-12").click(function () {
+            $.ajax({
+                url: '',@*'@Url.Action("FollowUs")',*@
+                type: 'GET',
+                dataType: 'html',
+                contentType: 'application/html; charset-utf-8',
+                success: function (names) {
+                    $("#userprofile").html('');
+                    $("#userprofile").html(names);
+                    FB.XFBML.parse();
+                },
+                error: function (ex) {
+                    alert("Failed to retreive" + ex);
+                }
+            });
+        });
+
+        $("#Dashboardid-1").click(function () {
+            $.ajax({
+                url: '@Url.Action("ViewProfile")',
+                type: 'GET',
+                dataType: 'html',
+                contentType: 'application/html; charset-utf-8',
+                success: function (names) {
+                    $("#userprofile").html('');
+                    $("#userprofile").html(names);
+                },
+                error: function (ex) {
+                    alert("Failed to retreive" + ex);
+                }
+            });
+        });
+
+        $("#Dashboardid-10").click(function () {
+            $.ajax({
+                url: '@Url.Action("Inbox")',
+                type: 'GET',
+                dataType: 'html',
+                contentType: 'application/html; charset-utf-8',
+                success: function (names) {
+                    $("#userprofile").html(names);
+                },
+                error: function (ex) {
+                    alert("Failed to retreive" + ex);
+                }
+            });
+        });
+
+        (function (d, s, id) {
+
+            var js, fjs = d.getElementsByTagName(s)[0];
+
+            if (d.getElementById(id)) return;
+
+            js = d.createElement(s); js.id = id;
+
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1798440160369364";
+
+            fjs.parentNode.insertBefore(js, fjs);
+
+        }(document, 'script', 'facebook-jssdk'));
+
+    });
+
+</script>
+
+
+

@@ -1,0 +1,81 @@
+﻿@model TrueWheels.Web.Models.UserLogin
+
+<script src="~/Content/js/vendor/jquery-1.10.2.min.js"></script>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="container" >
+        <div class="row" style="margin-top:20px" >
+            <div class="form" >
+                <br /><br />
+                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="background-color:#f7ffe9;border:none; border-radius:15px 15px">
+                    @Html.ValidationSummary(true)
+                    <form role="form">
+                        
+
+                        <fieldset>
+                            
+                            <h2>Please Sign In</h2>
+                            <hr class="colorgraph">
+                            <div class="form-group">
+                                <input type="text" name="UserName" id="UserName" class="form-control input-lg" placeholder="Mobile No.">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="Password" id="Password" class="form-control input-lg" placeholder="Password">
+                            </div>
+                            <span class="button-checkbox">
+                                @*<button type="button" class="btn" data-color="info">Remember Me</button>*@
+                                <input type="checkbox" name="remember_me" id="remember_me" checked="checked" class="hidden">
+                                <a href="@Url.Action("ForgotPassword", "TrueWheelsUser")" class="btn btn-link pull-right">Forgot Password?</a>
+                                @*<a href="" class="btn btn-link pull-right" data-toggle="modal" style="visibility:hidden" data-target=".bs-example-modal-lg">Forgot Password?</a>
+                        <button type="button" id="btn" class="btn btn-primary" data-toggle="modal" style="visibility:hidden" data-target=".bs-example-modal-lg">Windows 8 modal - Click to View</button>*@
+                            </span>
+                            <hr class="colorgraph">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" id="Login" value="Login">
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <a href="@Url.Action("SignUp", "TrueWheelsUser")" class="btn btn-lg btn-primary btn-block">Register</a>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                  
+                </div>
+        </div>
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+
+                        <h2>OTP Verification!</h2>
+                        <h4>Verify OTP Sent on your Phone Number.</h4>
+                        <p class="text-danger">
+                            @ViewBag.Error
+                        </p>
+                        <div style="padding: 15px; padding-bottom: 0px;">
+                            <form method="post" action="VerifyOTP" accept-charset="UTF-8">
+                                <input style="margin-bottom: 15px;" type="text" placeholder="Enter 6 digit OTP" id="OTP" pattern="{3}[0-9]{4}" maxlength="6" name="OTP">
+
+                                <input class="btn btn-primary" type="submit" id="Verify" value="Confirm" formaction="VerifyOTP" formmethod="post" />
+                                <label style="text-align:center;margin-top:5px">or</label>
+                                <input class="btn btn-primary" type="submit" id="ResendOTP" value="Resend OTP" formaction="ResendOTP" formmethod="post" />
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+       
+   
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

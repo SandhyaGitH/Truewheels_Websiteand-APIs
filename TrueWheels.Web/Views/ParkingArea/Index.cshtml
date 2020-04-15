@@ -1,0 +1,350 @@
+﻿@model List<TrueWheels.BEL.AvailableParkingAreaResult>
+
+@{
+    ViewBag.Title = "Index";
+    <script src="~/Content/js/vendor/jquery-1.10.2.min.js"></script>
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #markers_info .marker {
+            height: 40px;
+            cursor: pointer;
+        }
+
+
+        .labels {
+            color: white;
+            background-color: red;
+            font-family: "Lucida Grande", "Arial", sans-serif;
+            font-size: 10px;
+            text-align: center;
+            width: 30px;
+            white-space: nowrap;
+        }
+    </style>
+
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6v5-2uaq_wusHDktM9ILcqIrlPtnZgEk">
+    </script>
+    @*<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry,places&ext=.js"></script>*@
+    <script src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>
+    <script src="~/Js/yourNamespace.yourPageScript.js"></script>
+    <script type="text/javascript">
+    // put the script section somewhere appropriate in the page
+    
+    $(document).ready(function () {
+        var dropDown = $('#TypeId'); // assuming the ID of this element is 'TypeId'
+        dropDown.change(function () {
+            yourNamespace.yourPageScript.populateView(dropDown);
+        });
+    });
+</script>
+    
+     <script type="text/javascript">
+        
+         function SendOTPMessage() {
+             var modelDataJSON = '@Html.Raw(Json.Encode(Model))';
+
+             alert("API will send message at this time(internally)");
+             $.ajax({
+                 url: '@Url.Action("PopulateType", "ParkingArea")',
+                 data: { selectedValue: $(this).val(), vm: Model },
+                 cache: false,
+                 type: "Get",
+                 dataType: "html",
+                 success: function (data, textStatus, XMLHttpRequest) {
+                      SetData(data);
+                 }
+             });
+
+             function SetData(data) {
+                 $("#partialViewDiv").html(data); // HTML DOM replace
+             }
+            //$.ajax({
+            //    url: "/ParkingArea/PopulateType",
+            //    type: 'POST',
+            //    data: { selectedValue: "distance", vm: modelDataJSON },
+            //    dataType: 'json'
+            //    });
+
+
+         }
+
+         @*$("#TypeID").change(function (event) {
+             alert("hvgvg")
+             $.ajax({
+                url: '@Url.Action("PopulateType", "ParkingArea")',
+                 data: { id: $(this).val(), vm: modelDataJSON  /* add other additional parameters */ },
+                 cache: false,
+                 type: "POST",
+                 dataType: "html",
+                 success: function (data, textStatus, XMLHttpRequest) {
+                   alert("llll")  //SetData(data);
+                 }
+             });
+         });*@
+    </script>
+    
+    <script type="text/javascript">
+        var map;
+        var markers = [];
+        function initialize() {
+
+            var lat = '@ViewBag.Lat';
+            var lon = '@ViewBag.Lng';
+            var data = '@Html.Raw(HttpUtility.JavaScriptStringEncode(ViewBag.availableParkingList))';
+            var availableParkiangList = JSON.parse(data);
+            //alert(availableParkiangList[0].lattitude + availableParkiangList[0].longitude + availableParkiangList[0].parking_address);
+
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
+                zoom: 15,
+                center: new google.maps.LatLng(lat, lon),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            //var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i = 0; i < availableParkiangList.length; i++) {
+                var image = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2250%22%20height%3D%2250%22%20viewBox%3D%220%200%2038%2038%22%3E%3Cpath%20fill%3D%22%23808080%22%20stroke%3D%22%23ccc%22%20stroke-width%3D%22.5%22%20d%3D%22M34.305%2016.234c0%208.83-15.148%2019.158-15.148%2019.158S3.507%2025.065%203.507%2016.1c0-8.505%206.894-14.304%2015.4-14.304%208.504%200%2015.398%205.933%2015.398%2014.438z%22%2F%3E%3Ctext%20transform%3D%22translate%2819%2018.5%29%22%20fill%3D%22%23dff%22%20style%3D%22font-family%3A%20Arial%2C%20sans-serif%3Bfont-weight%3Abold%3Btext-align%3Acenter%3B%22%20font-size%3D%2212%22%20text-anchor%3D%22middle%22%3E' + (i + 1) + '%3C%2Ftext%3E%3C%2Fsvg%3E';
+
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(availableParkiangList[i].lattitude, availableParkiangList[i].longitude),
+                    map: map,
+                    icon: normalIcon(),
+                    title: availableParkiangList[i].parking_address,
+                    draggable: false,
+                    raiseOnDrag: false,
+                    labelContent: "ABCD",
+                    labelAnchor: new google.maps.Point(15, 65),
+                    labelClass: "labels", // the CSS class for the label
+                    labelInBackground: true,
+                    icon: image
+                    //icon: pinSymbol('green')
+                });
+
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                    return function () {
+                        
+                        infowindow.setContent(availableParkiangList[i].parking_address);
+                        infowindow.open(map, marker);
+                        locatePoint(availableParkiangList[i].lattitude, availableParkiangList[i].longitude , availableParkiangList[i].parking_address,availableParkiangList[i].Parking_id)
+                        //alert(availableParkiangList[i].parking_address);
+                    }
+                })(marker, i));
+                markers.push(marker);
+            }
+        }
+        //function pinSymbol(color) {
+        //    return {
+        //        path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
+        //        fillColor: color,
+        //        fillOpacity: 1,
+        //        strokeColor: '#000',
+        //        strokeWeight: 2,
+        //        scale: 2
+        //    };
+        //}
+        function showMap(lat, lon, address,parkingId) {
+            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                zoom: 15,
+                center: new google.maps.LatLng(lat, lon),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lon),
+                map: map
+            });
+            infowindow.setContent(address);
+            infowindow.open(map, marker);
+            var url = "/ParkingArea/LocateParkingArea/?lat=" + lat + "&long=" + lon + "&address=" + address + "&parkId=" + parkingId;
+            window.location = "http://" + window.location.host + url;
+        }
+        $('#markers_info .marker').hover(
+          // mouse in
+          function () {
+              alert("in");
+              // first we need to know which <div class="marker"></div> we hovered
+              var index = $('#markers_info .marker').index(this);
+              markers[index].setIcon(highlightedIcon());
+          },
+          // mouse out
+          function () {
+              alert("out");
+              // first we need to know which <div class="marker"></div> we hovered
+              var index = $('#markers_info .marker').index(this);
+              markers[index].setIcon(normalIcon());
+          }
+
+        );
+
+        function normalIcon() {
+            return {
+                url: 'http://1.bp.blogspot.com/_GZzKwf6g1o8/S6xwK6CSghI/AAAAAAAAA98/_iA3r4Ehclk/s1600/marker-green.png'
+            };
+        }
+        function highlightedIcon() {
+            return {
+                url: 'http://steeplemedia.com/images/markers/markerGreen.png'
+            };
+        }
+
+        function locatePoint(lat, long,address,parkingId) {
+            //alert(lat);
+            
+            var url = "/ParkingArea/LocateParkingArea/?lat=" + lat + "&long=" + long + "&address=" + address + "&parkId=" + parkingId;
+            window.location = "http://" + window.location.host + url;
+        }
+        //google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    @*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>*@
+    <script type="text/javascript">
+        $.fn.stars = function () {
+            return $(this).each(function () {
+                // Get the value
+                var val = parseFloat($(this).html());
+                // Make sure that the value is in 0 - 5 range, multiply to get width
+                var size = Math.max(0, (Math.min(5, val))) * 16;
+                // Create stars holder
+                var $span = $('<span />').width(size);
+                // Replace the numerical value with stars
+                $(this).html($span);
+            });
+        }
+        $(function () {
+            $('span.stars').stars();
+        });
+
+        function load(value)
+        {
+            var dataViewModel = @Html.Raw(Json.Encode(Model));
+            $.ajax({
+                url: '@Url.Action("AvailableParkingList", "ParkingArea")',
+                dataType: 'html',
+                data: { 'para': value ,'viewModel': JSON.stringify(dataViewModel)},
+                type: 'POST',
+                success: function (result) {
+                    $('#idAvailableParking').html(result);
+                },
+                error: function (xhr) {
+                    alert(xhr.statusText);
+                }
+            });
+        }
+
+    </script>
+    <style type="text/css">
+        span.stars, span.stars span {
+            display: block;
+            background: url(http://www.ulmanen.fi/stuff/stars.png) 0 -16px repeat-x;
+            width: 80px;
+            height: 16px;
+        }
+
+            span.stars span {
+                background-position: 0 0;
+            }
+
+        #markers_info .marker {
+            height: 50px;
+        }
+    </style>
+
+
+}
+
+<h4>Available Parking Area</h4>
+
+
+<div class="col-lg-12">
+   
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post,
+                        new { enctype = "multipart/form-data" }))
+        {
+            <div class="input-group input-group-lg">
+                @*<input type="text" placeholder="Enter Your Search String" class="form-control" />*@
+                @Html.TextBox("destination", "", new { id = "textSearch", @class = "form-control", @placeholder = "Enter Your Search String", @tabindex = "1" })
+                <div class="input-group-btn">
+                    @*<button type="button" class="btn btn-lg btn-success">Search</button>*@
+                    <input type="submit" class="btn btn-lg btn-success" value="Search" onclick="location.href= '@Url.Action("Index", "Home")'">
+                    <!--  <input type="button" value="Search" style=" width :15%; height : 80%; border : 1px solid black; border-radius : 4px;" />
+
+                     Button and dropdown menu -->
+                </div>
+            </div>
+
+        }        
+</div>
+<div class="col-sm-12"><hr class="colorgraph"></div>
+
+<div id="idAvailableParking">
+    @{Html.RenderPartial("AvailableParking", Model);}
+</div>
+
+@*<div class="col-lg-3" style="overflow:scroll ;height:80vh">
+        <div>
+            <input class="label-primary"  value="Sort By" />
+            
+        </div>
+        <div class="list-group  " id="markers_info">
+            @{
+            var i = 1;
+            foreach (var item in Model)
+            {
+
+                <a href="#" class="list-group-item marker" onclick='showMap(@item.lattitude,@item.longitude,"@item.parking_address")'>
+                    <span class="badge" style="color: #dff">@i</span>
+
+                    @item.parking_address<br />
+                    @item.BasicCharge<br/>
+                    @item.Rating<br/>
+                    @item.Distance<br/>
+                    <span class="stars">@item.Rating</span>
+                </a>
+
+                i = i + 1;
+                
+            }
+            }
+        </div>
+
+    </div>*@
+
+<div class="col-lg-9">
+    <div>
+        <div id="map_canvas" style="height:80vh"></div>
+    </div>
+</div>
+
+@*<div class="form-group">
+   
+    <div class="col-md-10">
+        @Html.DropDownList("TypeID", new List<SelectListItem> { 
+                       new SelectListItem { Value = "No_Of_Space_Avaiable" , Text = "No_Of_Space_Avaiable" },
+                       new SelectListItem { Value = "Distance" , Text = "Distance" },
+                       new SelectListItem { Value = "Parking_id" , Text = "Parking_id" }
+                    }, "value",
+                 new {@onchange = "SendOTPMessage();" }
+                  )
+        
+    </div>
+</div>*@
+@*<div id="partialViewDiv">
+    @Html.Partial("_ListParking", Model);
+</div>*@
+
+@*@{
+   
+        
+    @Html.Partial("_ListParking",Model.OrderBy(e => e.SpaceType))
+}*@
+
+<script type="text/javascript">initialize();</script>
+
